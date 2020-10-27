@@ -13,6 +13,10 @@
 </head>
 <body>
     <div id="app" class="container">
+        <h1>员工管理</h1>
+        <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" onclick="xiu(0);"><i class="fa fa-file-o"></i> 新建</button>
+        <button type="button" class="btn btn-default" title="删除" onclick="delpi()"><i class="fa fa-trash-o"></i> 删除</button>
+        <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
         <table class="table table-bordered">
             <tr>
                 <th><input id="selall" type="checkbox"></th>
@@ -51,37 +55,51 @@
             </strong>
         </div>
         <div id="example" style="text-align: right"> <ul id="pageLimit"></ul> </div>
+    </div>
+
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" id="ppa">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h3 id="myModalLabel">添加用户</h3>
+                    <h3 id="myModalLabel">添加</h3>
                 </div>
                 <form id="myforms" method="post">
                     <div class="modal-body">
                         <table class="table table-bordered table-striped"  width="800px">
-                            <input class="form-control" name="staffId" style="display:none" readonly="readonly" v-model="list.staffId">
+                            <input class="form-control" name="id" style="display:none" readonly="readonly" v-model="list.id">
                             <tr>
-                                <td>员工姓名</td>
-                                <td><input class="form-control" type="text" name="staffName" placeholder="姓名" v-model="list.staffName"></td>
+                                <td>商品名称</td>
+                                <td><input class="form-control" type="text" name="descriptionName" placeholder="商品名称" v-model="list.descriptionName"></td>
                             </tr>
                             <tr>
-                                <td>员工部门</td>
+                                <td>姓名</td>
                                 <td>
-                                    <select id="artictsect" class="form-control selectpicker"  data-live-search="true" name="sectionId"/>
+                                    <input class="form-control" type="text" name="userName" placeholder="姓名" v-model="list.userName">
                                 </td>
                             </tr>
                             <tr>
-                                <td>入职日期</td>
-                                <td><input class="form-control" type="date" name="time" v-model="list.time"></td>
+                                <td>手机号</td>
+                                <td><input class="form-control" type="text" name="cellPhone" placeholder="手机号" v-model="list.cellPhone"></td>
                             </tr>
                             <tr>
-                                <td>员工岗位</td>
-                                <td><input class="form-control" type="text" name="staffPost" placeholder="岗位" v-model="list.staffPost"></td>
+                                <td>节点权限</td>
+                                <td><input class="form-control" type="text" name="nodePermissions" placeholder="节点权限" v-model="list.nodePermissions"></td>
                             </tr>
                             <tr>
-                                <td>员工职责</td>
-                                <td><input class="form-control" type="text" name="staffDuty" placeholder="职责" v-model="list.staffDuty"></td>
+                                <td>板块权限</td>
+                                <td><input class="form-control" type="text" name="platePermissions" placeholder="板块权限" v-model="list.platePermissions"></td>
+                            </tr>
+                            <tr>
+                                <td>备注</td>
+                                <td><input class="form-control" type="text" name="remark" placeholder="备注" v-model="list.remark"></td>
+                            </tr>
+                            <tr>
+                                <td>账户启用状态</td>
+                                <td>
+                                    <input type="radio" name="status" value="1" v-model="list.status"/>启用
+                                    <input type="radio" name="status" value="2" v-model="list.status"/>不启用
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -104,7 +122,70 @@
                 pageSize:"3"
             }
         })
-
+        var vs = new Vue({
+            el: '#ppa',
+            data: {
+                list:''
+            }
+        })
+        //修改
+        function xiu(id){
+            $.ajax({
+                url:"/huiUser",
+                type:"post",
+                data:{id:id},
+                success:function(data){
+                    vs.list=data;
+                },
+            });
+        }
+        function shuaxin(){
+            searchUserList();
+        }
+        //删除
+        function shan(id) {
+            $.ajax({
+                url:"/deleteUser",
+                type:"post",
+                data:{id:id},
+                success:function(){
+                    searchUserList();
+                },
+            });
+        }
+        function delpi(){
+            var arr = document.getElementsByName("che");
+            var rid="";
+            for ( var i = 0; i < arr.length; i++) {
+                if (arr[i].checked) {
+                    rid+=rid==""?arr[i].value:","+arr[i].value;
+                }
+            }
+            if (rid=="") {
+                alert("请至少选中一条！");
+                return;
+            }
+            $.ajax({
+                url:"/deleteUser",
+                type:"post",
+                data:{'id':rid},
+                success:function(){
+                    searchUserList();
+                },
+            });
+        }
+        //新增
+        function insert(){
+            $.ajax({
+                url:"/insertUser",
+                type:"post",
+                data:$("#myforms").serialize(),
+                datatype:'json',
+                success:function(){
+                    searchUserList();
+                },
+            });
+        }
         //分页查询
         $(function() {
             searchUserList();

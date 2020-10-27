@@ -13,4 +13,12 @@ public interface UserMapper {
     Long findPagecount();
 
     List<StaffBean> findPage(@Param("currPage") Integer currPage,@Param("pageSize") Integer pageSize);
+
+    void insertUser(StaffBean staff);
+
+    void deleteUser(String[] id);
+
+    StaffBean huiUser(Integer id);
+
+    void updateUser(StaffBean staff);
 }

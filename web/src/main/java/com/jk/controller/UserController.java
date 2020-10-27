@@ -1,5 +1,6 @@
 package com.jk.controller;
 
+import com.jk.entity.StaffBean;
 import com.jk.pojo.PageResult;
 import com.jk.service.Userservice;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,5 +18,19 @@ public class UserController {
         return userservice.findPage(currPage,pageSize);
     }
 
+    @RequestMapping("/insertUser")
+    public void insertUser(StaffBean staff){
+        userservice.insertUser(staff);
+    }
+
+    @RequestMapping("/deleteUser")
+    public void deleteUser(String[] id){
+        userservice.deleteUser(id);
+    }
+
+    @RequestMapping("/huiUser")
+    public StaffBean huiUser(Integer id){
+        return userservice.huiUser(id);
+    }
 
 }

@@ -7,6 +7,18 @@
 *.iml
 out
 gen
+<<<<<<< HEAD
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+=======
+
+>>>>>>> 1b4587093465baa23e57b11bbb8435a8eef3598b
 ### Example user template template
 ### Example user template
 

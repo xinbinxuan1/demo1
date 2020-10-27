@@ -21,4 +21,23 @@ public class UserServiceImpl implements UserService{
         Long totalPage = total%pageSize == 0 ? total/pageSize : (total/pageSize + 1);
         return new PageResult(total, list, currPage, pageSize, totalPage);
     }
+
+    @Override
+    public void insertUser(StaffBean staff) {
+        if (staff.getId()==null){
+            userMapper.insertUser(staff);
+        }else{
+            userMapper.updateUser(staff);
+        }
+    }
+
+    @Override
+    public void deleteUser(String[] id) {
+        userMapper.deleteUser(id);
+    }
+
+    @Override
+    public StaffBean huiUser(Integer id) {
+        return userMapper.huiUser(id);
+    }
 }

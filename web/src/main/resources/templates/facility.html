@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../js/bootstrap/css/bootstrap.min.css">
+    <script src="../js/bootstraps/bootstrap-paginator.js"></script>
+    <script src="../js/vue/vue.min.js"></script>
+</head>
+<body>
+<div class="container" id="app">
+    <table>
+        <thead>
+            <tr>
+                <th><input type="checkbox" id="check"></th>
+                <th>编号</th>
+                <th>设备名称</th>
+                <th>设备识别号</th>
+                <th>设备类型</th>
+                <th>设备规格</th>
+                <th>设备节点</th>
+                <th>备注</th>
+                <th>账户启用状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="facilitys in facilityList">
+                <td><input type="checkbox" name="checkid" :value="facilitys.id"></td>
+                <td>{{facilitys.id}}</td>
+                <td>{{facilitys.facilityName}}</td>
+                <td>{{facilitys.facilityNumber}}</td>
+                <td>{{facilitys.typeName}}</td>
+                <td>{{facilitys.facilityspecification}}</td>
+                <td>{{facilitys.facilityNode}}</td>
+                <td>{{facilitys.}}</td>
+                <td>{{facilitys.remark}}</td>
+                <td>{{facilitys.status}}</td>
+                <td>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="col-md-6">
+        <strong>当前第 {{currPage}}页,每页<select style="width:50px;" v-model="pageSize" @change="shuaxin()">
+            <option value="3">3</option>
+            <option value="6">6</option>
+            <option value="10">10</option>
+        </select>条,共 {{totalPage}} 页.一共 {{total}} 条记录
+        </strong>
+    </div>
+    <div id="example" style="text-align: right"> <ul id="pageLimit"></ul> </div>
+</div>
+</body>
+<script type="text/javascript">
+    var ve=new Vue({
+        el:"#app",
+        data:{
+            facilityList:"",
+            totalPage:"",
+            total:"",
+            currPage:"1",
+            pageSize:"3"
+        }
+    })
+    $(function () {
+        selfacility();
+        $("#check").click(function () {
+          $("input[name='checkid']").attr("checked",this.checked);
+         })
+    })
+    function selfacility() {
+        alert(ve.currPage+"--"+ve.pageSize)
+         $.ajax({
+             url:"/selfacility",
+             type:"post",
+             data:{"currPage":ve.currPage,"pageSize":ve.pageSize},
+             dataType:"json",
+             success:function (data) {
+              ve.facilityList=data.rows;
+              ve.totalPage=data.totalPage;
+                 ve.total=data.total;
+                 ve.currPage=data.currPage;
+                 ve.pageSize=data.pageSize;
+                 setPage(data.currPage,data.totalPage,data.pageSize,selfacility);
+             }
+         })
+    }
+    function setPage(pageCurrent, pageSum, pageSize, callback) {
+        $('#pageLimit').bootstrapPaginator({
+            currentPage: pageCurrent,//当前的请求页面。
+            totalPages: pageSum,//一共多少页。
+            size:"normal",//应该是页眉的大小。
+            bootstrapMajorVersion: 3,//bootstrap的版本要求。
+            alignment:"right",
+            numberOfPages:pageSize,//一页列出多少数据。
+            itemTexts: function (type, page, current) {//如下的代码是将页眉显示的中文显示我们自定义的中文。
+                switch (type) {
+                    case "first": return "首页";
+                    case "prev": return "上一页";
+                    case "next": return "下一页";
+                    case "last": return "末页";
+                    case "page": return page;
+                }
+            },
+            //当单击操作按钮的时候, 执行该函数, 调用ajax渲染页面
+            onPageClicked: function (event,originalEvent,type,page) {
+                // 把当前点击的页码赋值给currentPage, 调用ajax,渲染页面
+                vm.currPage = page;
+                callback && callback()
+            }
+        });
+    }
+</script>
+</html>

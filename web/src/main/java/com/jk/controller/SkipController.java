@@ -10,4 +10,9 @@ public class SkipController {
     public String touser(){
         return "user";
     }
+
+    @RequestMapping("tofacility")
+    public String tofacility(){
+        return "facility";
+    }
 }

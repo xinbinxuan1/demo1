@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jk.dao.FacilityBeanMapper" >
+  <resultMap id="BaseResultMap" type="com.jk.entity.FacilityBean" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="facility_name" property="facilityName" jdbcType="VARCHAR" />
+    <result column="facility_number" property="facilityNumber" jdbcType="INTEGER" />
+    <result column="type_name" property="typeName" jdbcType="VARCHAR" />
+    <result column="facility_
+specification" property="facility
+specification" jdbcType="VARCHAR" />
+    <result column="facility_node" property="facilityNode" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, facility_name, facility_number, type_name, facility_
+specification, facility_node, 
+    remark, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tr_facility
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tr_facility
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jk.entity.FacilityBean" >
+    insert into tr_facility (id, facility_name, facility_number, 
+      type_name, facility_
+specification, facility_node, 
+      remark, status)
+    values (#{id,jdbcType=INTEGER}, #{facilityName,jdbcType=VARCHAR}, #{facilityNumber,jdbcType=INTEGER}, 
+      #{typeName,jdbcType=VARCHAR}, #{facility
+specification,jdbcType=VARCHAR}, #{facilityNode,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jk.entity.FacilityBean" >
+    insert into tr_facility
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="facilityName != null" >
+        facility_name,
+      </if>
+      <if test="facilityNumber != null" >
+        facility_number,
+      </if>
+      <if test="typeName != null" >
+        type_name,
+      </if>
+      <if test="facility
+specification != null" >
+        facility_
+specification,
+      </if>
+      <if test="facilityNode != null" >
+        facility_node,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="facilityName != null" >
+        #{facilityName,jdbcType=VARCHAR},
+      </if>
+      <if test="facilityNumber != null" >
+        #{facilityNumber,jdbcType=INTEGER},
+      </if>
+      <if test="typeName != null" >
+        #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="facility
+specification != null" >
+        #{facility
+specification,jdbcType=VARCHAR},
+      </if>
+      <if test="facilityNode != null" >
+        #{facilityNode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jk.entity.FacilityBean" >
+    update tr_facility
+    <set >
+      <if test="facilityName != null" >
+        facility_name = #{facilityName,jdbcType=VARCHAR},
+      </if>
+      <if test="facilityNumber != null" >
+        facility_number = #{facilityNumber,jdbcType=INTEGER},
+      </if>
+      <if test="typeName != null" >
+        type_name = #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="facility
+specification != null" >
+        facility_
+specification = #{facility
+specification,jdbcType=VARCHAR},
+      </if>
+      <if test="facilityNode != null" >
+        facility_node = #{facilityNode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jk.entity.FacilityBean" >
+    update tr_facility
+    set facility_name = #{facilityName,jdbcType=VARCHAR},
+      facility_number = #{facilityNumber,jdbcType=INTEGER},
+      type_name = #{typeName,jdbcType=VARCHAR},
+      facility_
+specification = #{facility
+specification,jdbcType=VARCHAR},
+      facility_node = #{facilityNode,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="count" resultType="int">
+        select count(1) from tr_facility
+    </select>
+    <select id="findPage" resultType="FacilityBean">
+        <bind name="keysf" value="(currPage-1)*pageSize"/>
+        select * from tr_facility limit #{keysf},#{pageSize}
+    </select>
+</mapper>
