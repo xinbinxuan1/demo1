@@ -15,7 +15,6 @@ public class TreeController {
     @Autowired
     private TreeService treeService;
     @RequestMapping("queryTree")
-
     public List<TreeBean> queryTree(){
 
         return treeService.queryTree();

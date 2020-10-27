@@ -13,8 +13,23 @@ import org.springframework.web.bind.annotation.RestController;
 public class FacilityController {
     @Autowired
     private FacilityService facilityService;
-@RequestMapping("selFacility")
-    public PageResult selFacility(@RequestParam Integer currPage,@RequestParam Integer pageSize,@RequestBody FacilityBean facilityBean){
-        return facilityService.selFacility(currPage,pageSize,facilityBean);
+
+    @RequestMapping("selFacility")
+    public PageResult selFacility(@RequestParam Integer currPage, @RequestParam Integer pageSize) {
+        return facilityService.selFacility(currPage, pageSize);
+    }
+
+    @RequestMapping("deleteAll")
+    public void deleteAll(@RequestParam String[] ids) {
+        facilityService.deleteAll(ids);
+    }
+
+    @RequestMapping("insertAll")
+    public void insertAll(@RequestBody FacilityBean facilityBean) {
+        facilityService.insertAll(facilityBean);
+    }
+    @RequestMapping("selfacilitybean")
+    public FacilityBean selfacilitybean(@RequestParam Integer ids){
+        return facilityService.selfacilitybean(ids);
     }
 }

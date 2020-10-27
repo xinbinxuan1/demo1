@@ -6,17 +6,14 @@
     <result column="facility_name" property="facilityName" jdbcType="VARCHAR" />
     <result column="facility_number" property="facilityNumber" jdbcType="INTEGER" />
     <result column="type_name" property="typeName" jdbcType="VARCHAR" />
-    <result column="facility_
-specification" property="facility
-specification" jdbcType="VARCHAR" />
+    <result column="facility_gui" property="facilityGui" jdbcType="VARCHAR" />
     <result column="facility_node" property="facilityNode" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, facility_name, facility_number, type_name, facility_
-specification, facility_node, 
-    remark, status
+    id, facility_name, facility_number, type_name, facility_gui, facility_node, remark, 
+    status
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -30,12 +27,10 @@ specification, facility_node,
   </delete>
   <insert id="insert" parameterType="com.jk.entity.FacilityBean" >
     insert into tr_facility (id, facility_name, facility_number, 
-      type_name, facility_
-specification, facility_node, 
+      type_name, facility_gui, facility_node, 
       remark, status)
     values (#{id,jdbcType=INTEGER}, #{facilityName,jdbcType=VARCHAR}, #{facilityNumber,jdbcType=INTEGER}, 
-      #{typeName,jdbcType=VARCHAR}, #{facility
-specification,jdbcType=VARCHAR}, #{facilityNode,jdbcType=VARCHAR}, 
+      #{typeName,jdbcType=VARCHAR}, #{facilityGui,jdbcType=VARCHAR}, #{facilityNode,jdbcType=VARCHAR}, 
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.jk.entity.FacilityBean" >
@@ -53,10 +48,8 @@ specification,jdbcType=VARCHAR}, #{facilityNode,jdbcType=VARCHAR},
       <if test="typeName != null" >
         type_name,
       </if>
-      <if test="facility
-specification != null" >
-        facility_
-specification,
+      <if test="facilityGui != null" >
+        facility_gui,
       </if>
       <if test="facilityNode != null" >
         facility_node,
@@ -81,10 +74,8 @@ specification,
       <if test="typeName != null" >
         #{typeName,jdbcType=VARCHAR},
       </if>
-      <if test="facility
-specification != null" >
-        #{facility
-specification,jdbcType=VARCHAR},
+      <if test="facilityGui != null" >
+        #{facilityGui,jdbcType=VARCHAR},
       </if>
       <if test="facilityNode != null" >
         #{facilityNode,jdbcType=VARCHAR},
@@ -109,11 +100,8 @@ specification,jdbcType=VARCHAR},
       <if test="typeName != null" >
         type_name = #{typeName,jdbcType=VARCHAR},
       </if>
-      <if test="facility
-specification != null" >
-        facility_
-specification = #{facility
-specification,jdbcType=VARCHAR},
+      <if test="facilityGui != null" >
+        facility_gui = #{facilityGui,jdbcType=VARCHAR},
       </if>
       <if test="facilityNode != null" >
         facility_node = #{facilityNode,jdbcType=VARCHAR},
@@ -132,19 +120,23 @@ specification,jdbcType=VARCHAR},
     set facility_name = #{facilityName,jdbcType=VARCHAR},
       facility_number = #{facilityNumber,jdbcType=INTEGER},
       type_name = #{typeName,jdbcType=VARCHAR},
-      facility_
-specification = #{facility
-specification,jdbcType=VARCHAR},
+      facility_gui = #{facilityGui,jdbcType=VARCHAR},
       facility_node = #{facilityNode,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-    <select id="count" resultType="int">
-        select count(1) from tr_facility
-    </select>
-    <select id="findPage" resultType="FacilityBean">
-        <bind name="keysf" value="(currPage-1)*pageSize"/>
-        select * from tr_facility limit #{keysf},#{pageSize}
-    </select>
+  <select id="count" resultType="Long">
+    select count(1) from tr_facility
+</select>
+  <select id="findPage" resultType="FacilityBean">
+    <bind name="keysf" value="(currPage-1)*pageSize"/>
+    select * from tr_facility limit #{keysf},#{pageSize}
+  </select>
+  <delete id="deleteAll" parameterType="string">
+    delete from tr_facility where id in
+    <foreach collection="array" open="(" close=")" separator="," item="id">
+      #{id}
+    </foreach>
+  </delete>
 </mapper>

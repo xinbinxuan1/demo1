@@ -10,9 +10,6 @@
     <script src="../js/bootstrap/js/bootstrap.min.js"></script>
     <script src="../js/bootstrap/js/bootstrap.addtabs.min.js"></script>
     <script src="../js/bootstrap/js/bootstrap-treeview.min.js"></script>
-
-
-</head>
 <body>
 <!-- bootstrap展示树 -->
 <div class="container-fluid" style="margin-top: 59px;">
@@ -43,7 +40,7 @@
     })
     function initTree(){
         $.ajax({
-            url: "/queryTree",
+            url: "/seltree",
             type: "post",
             dataType: "json",
             success: function(data){

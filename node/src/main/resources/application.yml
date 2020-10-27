@@ -2,13 +2,17 @@
 server:
   port: 8764
 spring:
+<<<<<<< HEAD
+=======
+
+>>>>>>> da72ab307b9e2479db4c8915e59686f42470337e
   application:
     name: node
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://LAPTOP-UHQ1ED8D:3306/2004?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8
+    url: jdbc:mysql://localhost:3306/2004?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8
     username: root
-    password: root
+    password:
 
 eureka:
   client:
