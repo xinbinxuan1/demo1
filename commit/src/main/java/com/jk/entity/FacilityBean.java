@@ -12,7 +12,7 @@ public class FacilityBean {
 
     private String typeName;
 
-    private String facilityspecification;
+    private String facilityGui;
 
     private String facilityNode;
 

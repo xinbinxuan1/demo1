@@ -4,5 +4,12 @@ import com.jk.entity.FacilityBean;
 import com.jk.pojo.PageResult;
 
 public interface FacilityService {
-    PageResult selFacility(Integer currPage, Integer pageSize, FacilityBean facilityBean);
+
+    PageResult selFacility(Integer currPage, Integer pageSize);
+
+    void deleteAll(String[] ids);
+
+    void insertAll(FacilityBean facilityBean);
+
+    FacilityBean selfacilitybean(Integer ids);
 }

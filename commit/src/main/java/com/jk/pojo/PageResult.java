@@ -1,5 +1,7 @@
 package com.jk.pojo;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.List;
 
