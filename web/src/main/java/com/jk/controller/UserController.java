@@ -4,9 +4,11 @@ import com.jk.entity.StaffBean;
 import com.jk.pojo.PageResult;
 import com.jk.service.Userservice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@RefreshScope
 @RestController
 public class UserController {
 
