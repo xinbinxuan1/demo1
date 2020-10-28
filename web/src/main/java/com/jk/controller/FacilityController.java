@@ -2,6 +2,7 @@ package com.jk.controller;
 
 import com.jk.entity.FacilityBean;
 import com.jk.entity.TreeBean;
+import com.jk.entity.UserSnameBean;
 import com.jk.pojo.PageResult;
 import com.jk.service.FacilityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,15 @@ public class FacilityController {
     @RequestMapping("/selfacilityId")
     public FacilityBean selfacilityId(Integer ids){
         return facilityService.selfacilitybean(ids);
+    }
+    @RequestMapping("seluser")
+    public String seluser(UserSnameBean userSnameBean){
+        UserSnameBean user=facilityService.seluser(userSnameBean);
+        if(user==null){
+            return "用户不存在或者账号错误";
+        }if(!userSnameBean.getPassword().equals( user.getPassword())){
+            return "密码错误";
+        }
+        return "登录成功";
     }
 }

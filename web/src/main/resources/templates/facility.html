@@ -10,9 +10,9 @@
     <script src="../js/vue/vue.min.js"></script>
 
 </head>
-<body>
+<body style="background-color: rgba(200,100,50,0)">
 <div class="container" id="app">
-    <input type="button" class="btn btn-default" value="删除" onclick="delpi()">
+    <input  type="button" class="btn btn-default" value="删除" onclick="delpi()">
     <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" onclick="xiu(0);"><i class="fa fa-file-o"></i> 新建</button>
     <table class="table table-bordered">
         <thead >
@@ -36,12 +36,12 @@
                 <td>{{faci.facilityName}}</td>
                 <td>{{faci.facilityNumber}}</td>
                 <td>{{faci.typeName}}</td>
-                <td>{{faci.facilityspecification}}</td>
+                <td>{{faci.facilityGui}}</td>
                 <td>{{faci.facilityNode}}</td>
                 <td>{{faci.remark}}</td>
                 <td>{{faci.status}}</td>
                 <td>
-                    <input type="button" value="删除" @click="shan(faci.id)">
+                    <a  @click="shan(faci.id)">[删除]</a>
                     <a data-toggle="modal" data-target="#editModal" @click="xiu(faci.id)">[编辑]</a> |
 
                 </td>

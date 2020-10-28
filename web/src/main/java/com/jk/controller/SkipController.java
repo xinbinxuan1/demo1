@@ -15,4 +15,13 @@ public class SkipController {
     public String tofacility(){
         return "facility";
     }
+    @RequestMapping("tologin")
+    public String tologin(){
+        return "login";
+    }
+    @RequestMapping("toindex")
+    public String toindex(){
+        return "index";
+    }
+
 }

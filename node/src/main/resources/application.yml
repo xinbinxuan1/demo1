@@ -2,10 +2,6 @@
 server:
   port: 8764
 spring:
-<<<<<<< HEAD
-=======
-
->>>>>>> da72ab307b9e2479db4c8915e59686f42470337e
   application:
     name: node
   datasource:
