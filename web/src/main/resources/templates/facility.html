@@ -36,13 +36,13 @@
                 <td>{{faci.facilityName}}</td>
                 <td>{{faci.facilityNumber}}</td>
                 <td>{{faci.typeName}}</td>
-                <td>{{faci.facilityspecification}}</td>
+                <td>{{faci.facilityGui}}</td>
                 <td>{{faci.facilityNode}}</td>
                 <td>{{faci.remark}}</td>
                 <td>{{faci.status}}</td>
                 <td>
-                    <input type="button" value="删除" @click="shan(faci.id)">
-                    <a data-toggle="modal" data-target="#editModal" @click="xiu(faci.id)">[编辑]</a> |
+                    <input type="button" value="删除" @click="shan(faci.id)"> |
+                    <a data-toggle="modal" data-target="#editModal" @click="xiu(faci.id)">[编辑]</a>
 
                 </td>
             </tr>

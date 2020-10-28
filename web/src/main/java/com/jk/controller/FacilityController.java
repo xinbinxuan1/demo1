@@ -5,11 +5,13 @@ import com.jk.entity.TreeBean;
 import com.jk.pojo.PageResult;
 import com.jk.service.FacilityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@RefreshScope
 @RestController
 public class FacilityController {
     @Autowired

@@ -1,8 +1,10 @@
 package com.jk.controller;
 
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+@RefreshScope
 @Controller
 public class SkipController {
 

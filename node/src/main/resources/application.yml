@@ -2,26 +2,5 @@
 server:
   port: 8764
 spring:
-<<<<<<< HEAD
-=======
-
->>>>>>> da72ab307b9e2479db4c8915e59686f42470337e
   application:
     name: node
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/2004?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8
-    username: root
-    password:
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
-
-mybatis:
-  mapper-locations: classpath*:mybatis/*Mapper.xml
-  type-aliases-package: com.jk.entity
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    map-underscore-to-camel-case: true
