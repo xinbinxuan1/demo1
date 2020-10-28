@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RefreshScope
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -34,5 +35,6 @@ public class UserController {
     public StaffBean huiUser(Integer id){
         return userservice.huiUser(id);
     }
+
 
 }
