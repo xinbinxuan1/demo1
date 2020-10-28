@@ -2,5 +2,6 @@
 server:
   port: 8762
 spring:
+
   application:
     name: web
