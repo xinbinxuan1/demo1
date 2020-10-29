@@ -1,6 +1,8 @@
 package com.jk.controller;
 
 import com.jk.entity.StaffBean;
+import com.jk.entity.SysUser;
+import com.jk.entity.Tree;
 import com.jk.pojo.PageResult;
 import com.jk.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class UserController {
@@ -34,5 +38,20 @@ public class UserController {
     @RequestMapping("/huiUser")
     public StaffBean huiUser(@RequestParam Integer id){
         return userService.huiUser(id);
+    }
+
+    @RequestMapping("/selectUserInfoByCode")
+    public SysUser selectUserInfoByCode(@RequestParam String userCode){
+        return userService.selectUserInfoByCode(userCode);
+    }
+
+    @RequestMapping("/selectListTree")
+    List<Tree> selectListTree(@RequestParam Integer userId){
+        return userService.selectListTree(userId);
+    }
+
+    @RequestMapping("/selectPowerKeyList")
+    public List<String> selectPowerKeyList(@RequestParam Integer userId){
+        return userService.selectPowerKeyList(userId);
     }
 }

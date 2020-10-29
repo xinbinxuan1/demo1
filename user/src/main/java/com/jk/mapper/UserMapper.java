@@ -1,6 +1,8 @@
 package com.jk.mapper;
 
 import com.jk.entity.StaffBean;
+import com.jk.entity.SysUser;
+import com.jk.entity.Tree;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -21,4 +23,10 @@ public interface UserMapper {
     StaffBean huiUser(Integer id);
 
     void updateUser(StaffBean staff);
+
+    SysUser selectUserInfoByCode(String userCode);
+
+    List<Tree> selectListTree(@Param("pid") Integer pid,@Param("userId") Integer userId);
+
+    List<String> selectPowerKeyList(Integer userId);
 }

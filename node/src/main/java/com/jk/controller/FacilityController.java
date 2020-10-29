@@ -1,7 +1,6 @@
 package com.jk.controller;
 
 import com.jk.entity.FacilityBean;
-import com.jk.entity.UserSnameBean;
 import com.jk.pojo.PageResult;
 import com.jk.service.FacilityService;
 import org.springframework.beans.factory.annotation.Autowired;

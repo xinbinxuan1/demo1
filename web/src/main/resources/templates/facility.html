@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -12,8 +12,8 @@
 </head>
 <body style="background-color: rgba(200,100,50,0)">
 <div class="container" id="app">
-    <input  type="button" class="btn btn-default" value="删除" onclick="delpi()">
-    <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" onclick="xiu(0);"><i class="fa fa-file-o"></i> 新建</button>
+    <input  type="button" shiro:hasPermission="goods:deleteAll" class="btn btn-default" value="删除" onclick="delpi()">
+    <button type="button" shiro:hasPermission="goods:insertAll" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" onclick="xiu(0);"><i class="fa fa-file-o"></i> 新建</button>
     <table class="table table-bordered">
         <thead >
             <tr>
@@ -41,13 +41,9 @@
                 <td>{{faci.remark}}</td>
                 <td>{{faci.status}}</td>
                 <td>
-<<<<<<< HEAD
-                    <a  @click="shan(faci.id)">[删除]</a>
-                    <a data-toggle="modal" data-target="#editModal" @click="xiu(faci.id)">[编辑]</a> |
-=======
-                    <input type="button" value="删除" @click="shan(faci.id)"> |
-                    <a data-toggle="modal" data-target="#editModal" @click="xiu(faci.id)">[编辑]</a>
->>>>>>> 57ebc669146d3ef37b521852a023fcc10f10bf73
+
+                    <input type="button" shiro:hasPermission="goods:deleteAll" value="删除" @click="shan(faci.id)"> |
+                    <a data-toggle="modal" shiro:hasPermission="goods:selfacilityId" data-target="#editModal" @click="xiu(faci.id)">[编辑]</a>
 
                 </td>
             </tr>

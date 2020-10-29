@@ -19,7 +19,7 @@
 </head>
 <body >
 <!-- bootstrap展示树 -->
-
+<a class="btn btn-info" href="../logout">注销</a>
 <div style="margin-top: 59px;">
     <div class="row">
         <div class="col-md-2" >
@@ -48,7 +48,7 @@
     })
     function initTree(){
         $.ajax({
-            url: "/seltree",
+            url: "/user/selectListTree",
             type: "post",
             dataType: "json",
             success: function(data){

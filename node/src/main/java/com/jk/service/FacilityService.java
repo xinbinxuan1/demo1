@@ -1,7 +1,6 @@
 package com.jk.service;
 
 import com.jk.entity.FacilityBean;
-import com.jk.entity.UserSnameBean;
 import com.jk.pojo.PageResult;
 
 public interface FacilityService {

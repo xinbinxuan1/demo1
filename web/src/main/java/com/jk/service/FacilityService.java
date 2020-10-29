@@ -1,8 +1,8 @@
 package com.jk.service;
 
 import com.jk.entity.FacilityBean;
+import com.jk.entity.SysUser;
 import com.jk.entity.TreeBean;
-import com.jk.entity.UserSnameBean;
 import com.jk.pojo.PageResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,5 +25,5 @@ public interface FacilityService {
     @RequestMapping("selfacilitybean")
     public FacilityBean selfacilitybean(@RequestParam Integer ids);
     @RequestMapping("seluser")
-   public UserSnameBean seluser(@RequestBody UserSnameBean userSnameBean);
+   public SysUser seluser(@RequestBody SysUser userSnameBean);
 }

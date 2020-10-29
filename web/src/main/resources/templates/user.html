@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -14,8 +14,8 @@
 <body style="background-color: rgba(200,100,50,0)">
     <div id="app" class="container">
         <h1>员工管理</h1>
-        <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" onclick="xiu(0);"><i class="fa fa-file-o"></i> 新建</button>
-        <button type="button" class="btn btn-default" title="删除" onclick="delpi()"><i class="fa fa-trash-o"></i> 删除</button>
+        <button type="button" shiro:hasPermission="user:insertUser" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" onclick="xiu(0);"><i class="fa fa-file-o"></i> 新建</button>
+        <button type="button" shiro:hasPermission="user:deleteUser" class="btn btn-default" title="删除" onclick="delpi()"><i class="fa fa-trash-o"></i> 删除</button>
         <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
         <table class="table table-bordered">
             <tr>
@@ -41,8 +41,8 @@
                 <td>{{user.remark}}</td>
                 <td>{{user.status==1?"启用":"不启用"}}</td>
                 <td>
-                    <a data-toggle="modal" data-target="#editModal" @click="xiu(user.id)">[编辑]</a> |
-                    <a @click="shan(user.id)">[删除]</a>
+                    <a data-toggle="modal" data-target="#editModal"  shiro:hasPermission="user:huiUser" @click="xiu(user.id)">[编辑]</a> |
+                    <a shiro:hasPermission="user:deleteUser" @click="shan(user.id)">[删除]</a>
                 </td>
             </tr>
         </table>

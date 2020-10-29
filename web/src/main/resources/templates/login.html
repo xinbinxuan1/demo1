@@ -28,7 +28,7 @@
             <div class='icon'>
                 <img alt="" src='../js/img/user_icon_copy.png'>
             </div>
-            <input name="name" placeholder='用户名' maxlength="16" type='text' autocomplete="off"/>
+            <input name="usercode" placeholder='用户名' maxlength="16" type='text' autocomplete="off"/>
             <div class='validation'>
                 <img alt="" src='../js/img/tick.png'>
             </div>
@@ -125,7 +125,7 @@
     layui.use('layer', function () {
         //非空验证
         $('input[type="button"]').click(function () {
-            var login = $('input[name="name"]').val();
+            var login = $('input[name="usercode"]').val();
             var pwd = $('input[name="password"]').val();
             if (login == '') {
                 ErroAlert('请输入您的账号');
@@ -152,15 +152,15 @@
 
                   $.ajax({
 
-                      url:"/seluser",
+                      url:"/user/login",
                       type:"post",
-                      data:{name:login,password:pwd},
+                      data:{usercode:login,password:pwd},
                       success:function (data) {
                                 alert(data);
                                 if(data=="登录成功"){
-                                    location.href="/toindex";
+                                    location.href="/page/toindex";
                                 }else{
-                                    location.href="/tologin";
+                                    location.href="/page/toLogin";
                           }
                       }
                   })
