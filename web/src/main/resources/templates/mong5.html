@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../js/bootstrap/css/bootstrap.min.css">
+    <script src="../js/bootstraps/bootstrap-paginator.js"></script>
+    <script src="../js/vue/vue.min.js"></script>
+</head>
+<body>
+   <div class="container" id="app">
+       <h1>Mongodb管理</h1>
+       <form action="" id="list_form">
+           <div class="form-group">
+               <label for="className" class="col-sm-1 control-label">名称：</label>
+               <div class="col-sm-2">
+                   <input type="text" class="form-control" id="className" v-model="className" placeholder="请输入名称">
+               </div>
+           </div>
+           <a class="btn btn-default" shiro:hasPermission="mongod:deleteAww" @click="ps()">删除</a>
+           <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
+           <button type="button" class="btn btn-default" onclick="sellogMongod();">搜索</button>
+       </form>
+       <table class="table table-bordered">
+           <thead>
+           <tr>
+               <th><input type="checkbox" id="check" ></th>
+                <th>methodName</th>
+                <th>className</th>
+                <th>requestParam</th>
+                <th>responseParan</th>
+                <th>操作</th>
+           </tr>
+           </thead>
+           <tbody>
+               <tr v-for="logmong in selmongod">
+                   <td><input type="checkbox" name="checkid" :value="logmong.id"></td>
+                   <td>{{logmong.methodName}}</td>
+                   <td>{{logmong.className}}</td>
+                   <td>{{logmong.requestParam}}</td>
+                   <td>{{logmong.responseParan}}</td>
+                   <td>
+                       <a @click="ds(logmong.id)" shiro:hasPermission="mongod:deleteAww" >[ 删除 ]</a>
+
+                   </td>
+               </tr>
+           </tbody>
+       </table>
+       <div class="col-md-6">
+           <strong>当前第 {{currPage}}页,每页<select style="width:50px;" v-model="pageSize" @change="shuaxin()">
+               <option value="3">3</option>
+               <option value="6">6</option>
+               <option value="10">10</option>
+           </select>条,共 {{totalPage}} 页.一共 {{total}} 条记录
+           </strong>
+       </div>
+       <div id="example" style="text-align: right"> <ul id="pageLimit"></ul> </div>
+   </div>
+</body>
+<script type="text/javascript">
+    var vm=new Vue({
+        el:"#app",
+        data:{
+            selmongod:"",
+            totalPage:"",
+            total:"",
+            currPage:"1",
+            pageSize:"3",
+            className:""
+        }
+    })
+    $(function(){
+        sellogMongod();
+        $("#check").click(function(){
+            $("input[name='checkid']").attr("checked",this.checked);
+        })
+    })
+    function sellogMongod() {
+       $.ajax({
+           url:"/selLogMongod",
+           type:"post",
+           data:{currPage:vm.currPage,pageSize:vm.pageSize,className:vm.className},
+           success:function (data) {
+              vm.selmongod=data.rows;
+               vm.totalPage = data.totalPage;
+               vm.total = data.total;
+               vm.currPage = data.currPage;
+               vm.pageSize = data.pageSize;
+               setPage(data.currPage, data.totalPage, data.pageSize, sellogMongod);
+           }
+       })
+    }
+    /**
+     *
+     * @param pageCurrent 当前所在页
+     * @param pageSum 总页数
+     * @param callback 调用ajax
+     */
+    function setPage(pageCurrent, pageSum, pageSize, callback) {
+        $('#pageLimit').bootstrapPaginator({
+            currentPage: pageCurrent,//当前的请求页面。
+            totalPages: pageSum,//一共多少页。
+            size:"normal",//应该是页眉的大小。
+            bootstrapMajorVersion: 3,//bootstrap的版本要求。
+            alignment:"right",
+            numberOfPages:pageSize,//一页列出多少数据。
+            itemTexts: function (type, page, current) {//如下的代码是将页眉显示的中文显示我们自定义的中文。
+                switch (type) {
+                    case "first": return "首页";
+                    case "prev": return "上一页";
+                    case "next": return "下一页";
+                    case "last": return "末页";
+                    case "page": return page;
+                }
+            },
+            //当单击操作按钮的时候, 执行该函数, 调用ajax渲染页面
+            onPageClicked: function (event,originalEvent,type,page) {
+                // 把当前点击的页码赋值给currentPage, 调用ajax,渲染页面
+                vm.currPage = page;
+                callback && callback()
+            }
+        });
+    }
+  function ps() {
+         var arr=document.getElementsByName("checkid");
+         var ids="";
+         for(var i=0;i<arr.length;i++){
+             if(arr[i].checked){
+                 ids+=ids==""?arr[i].value:","+arr[i].value;
+             }
+         }if(ids==""){
+             alert("请至少选择一条信息");
+            return;
+        }
+             $.ajax({
+                 url:"/deleteAww",
+                 type:"post",
+                 data:{ids:ids},
+                 success:function () {
+                  alert("删除成功");
+                     sellogMongod();
+                 }
+             })
+    }
+    function ds(ids){
+        if(ids==""){
+            alert("请至少选择一条信息");
+            return;
+        }
+        $.ajax({
+            url:"/deleteAll",
+            type:"post",
+            data:{ids:ids},
+            success:function () {
+                alert("删除成功");
+                sellogMongod();
+            }
+        })
+    }
+</script>
+</html>

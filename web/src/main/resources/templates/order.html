@@ -45,13 +45,13 @@
             </tr>
         </table>
         <div class="col-md-6">
-            <strong>当前第 {{currPage}}页,每页<select style="width:50px;" v-model="pageSize" @change="shuaxin()">
-                <option value="3">3</option>
-                <option value="6">6</option>
-                <option value="10">10</option>
-            </select>条,共 {{totalPage}} 页.一共 {{total}} 条记录
-            </strong>
-        </div>
+        <strong>当前第 {{currPage}}页,每页<select style="width:50px;" v-model="pageSize" @change="shuaxin()">
+            <option value="3">3</option>
+            <option value="6">6</option>
+            <option value="10">10</option>
+        </select>条,共 {{totalPage}} 页.一共 {{total}} 条记录
+        </strong>
+    </div>
         <div id="example" style="text-align: right"> <ul id="pageLimit"></ul> </div>
     </div>
 

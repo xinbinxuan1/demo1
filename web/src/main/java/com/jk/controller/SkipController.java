@@ -33,10 +33,17 @@ public class SkipController {
         return "index";
     }
 
+    @RequestMapping("/tomong")
+    @RequiresPermissions("mongod:tomong")
+    public String tomong(){
+        return "mong5";
+    }
+
 
 
 
     @RequestMapping("/toorder")
+    @RequiresPermissions("order:toorder")
     public String toorder(){
         return "order";
     }
