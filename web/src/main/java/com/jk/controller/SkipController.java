@@ -33,9 +33,13 @@ public class SkipController {
         return "index";
     }
 
+
+
+
     @RequestMapping("/toorder")
     public String toorder(){
         return "order";
     }
+
 
 }
