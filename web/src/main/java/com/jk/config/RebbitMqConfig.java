@@ -1,4 +1,5 @@
 package com.jk.config;
+import org.aspectj.lang.annotation.Aspect;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.FanoutExchange;
@@ -15,7 +16,6 @@ import java.util.Iterator;
 
 @Configuration
 public class RebbitMqConfig {
-
 
         @Bean
         public Queue logQueue() {

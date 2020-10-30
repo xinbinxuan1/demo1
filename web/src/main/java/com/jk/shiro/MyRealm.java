@@ -59,8 +59,13 @@ public class MyRealm extends AuthorizingRealm {
 
     public static void main(String[] args) {
         String hashAlgorithmName = "MD5";//加密方式 MD5  SHA
+<<<<<<< HEAD
         Object crdentials = "123";//密码原值
         Object salt = "lin";//盐值 (用户账号、UUID、时间戳、随机字母 作为盐值，盐值必须保持唯一)
+=======
+        Object crdentials = "linke";//密码原值
+        Object salt = "linke";//盐值 (用户账号、UUID、时间戳、随机字母 作为盐值，盐值必须保持唯一)
+>>>>>>> fc2594062ba0f298f607b275d3ab5cb16e33c8b5
         ByteSource saltByte = ByteSource.Util.bytes(salt);
         int hashIterations = 1024;//加密1024次  散列次数
         Object result = new SimpleHash(hashAlgorithmName, crdentials, saltByte, hashIterations);

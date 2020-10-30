@@ -21,6 +21,7 @@
 
     <dependencies>
 
+<<<<<<< HEAD
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -35,6 +36,8 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
+=======
+>>>>>>> fc2594062ba0f298f607b275d3ab5cb16e33c8b5
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
