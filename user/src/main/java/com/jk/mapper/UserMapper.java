@@ -14,7 +14,7 @@ public interface UserMapper {
 
     Long findPagecount();
 
-    List<StaffBean> findPage(@Param("currPage") Integer currPage,@Param("pageSize") Integer pageSize);
+    List<StaffBean> findPage(@Param("currPage") Integer currPage, @Param("pageSize") Integer pageSize);
 
     void insertUser(StaffBean staff);
 
@@ -26,7 +26,7 @@ public interface UserMapper {
 
     SysUser selectUserInfoByCode(String userCode);
 
-    List<Tree> selectListTree(@Param("pid") Integer pid,@Param("userId") Integer userId);
+    List<Tree> selectListTree(@Param("pid") Integer pid, @Param("userId") Integer userId);
 
     List<String> selectPowerKeyList(Integer userId);
 }

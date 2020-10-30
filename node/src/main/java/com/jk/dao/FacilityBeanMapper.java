@@ -22,7 +22,7 @@ public interface FacilityBeanMapper {
 
     Long count();
 
-    List<FacilityBean> findPage(@Param("currPage") Integer currPage,@Param("pageSize") Integer pageSize);
+    List<FacilityBean> findPage(@Param("currPage") Integer currPage, @Param("pageSize") Integer pageSize);
 
     void deleteAll(String[] ids);
 }

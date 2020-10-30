@@ -11,19 +11,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(value="node")
+@FeignClient(value = "node")
 public interface FacilityService {
     @RequestMapping("selFacility")
-    public PageResult selFacility(@RequestParam Integer currPage,@RequestParam Integer pageSize);
+    public PageResult selFacility(@RequestParam Integer currPage, @RequestParam Integer pageSize);
+
     @RequestMapping("queryTree")
     public List<TreeBean> queryTree();
+
     @RequestMapping("deleteAll")
-    public void deleteAll(@RequestParam String[] ids) ;
+    public void deleteAll(@RequestParam String[] ids);
+
     @RequestMapping("insertAll")
     public void insertAll(@RequestBody FacilityBean facilityBean);
 
     @RequestMapping("selfacilitybean")
     public FacilityBean selfacilitybean(@RequestParam Integer ids);
+
     @RequestMapping("seluser")
-   public SysUser seluser(@RequestBody SysUser userSnameBean);
+    public SysUser seluser(@RequestBody SysUser userSnameBean);
 }

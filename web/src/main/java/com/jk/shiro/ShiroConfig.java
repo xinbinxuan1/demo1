@@ -21,7 +21,7 @@ public class ShiroConfig {
 
     //配置shiro拦截
     @Bean
-    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager){
+    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         ShiroFilterFactoryBean sfb = new ShiroFilterFactoryBean();
         sfb.setSecurityManager(securityManager);//添加securityManager，要不然没法认证
         // ShiroFilterFactoryBean自带过滤和拦截。以及转发请求和返回页面
@@ -40,20 +40,21 @@ public class ShiroConfig {
         map.put("/order/deleteOrder","anon");
         map.put("/order/insertOrder","anon");
         map.put("/order/huixianOrder","anon");
+
         //放开静态资源
-        map.put("/js/**","anon");
-        map.put("/css/**","anon");
-        map.put("/images/**","anon");
-        map.put("/img/**","anon");
+        map.put("/js/**", "anon");
+        map.put("/css/**", "anon");
+        map.put("/images/**", "anon");
+        map.put("/img/**", "anon");
         //其他的都拦截
-        map.put("/**","authc");
+        map.put("/**", "authc");
         // 将自定义的过滤器设置到shiro过滤器链中
         sfb.setFilterChainDefinitionMap(map);
         return sfb;
     }
 
     @Bean
-    public SecurityManager securityManager(MyRealm myRealm){
+    public SecurityManager securityManager(MyRealm myRealm) {
         DefaultWebSecurityManager dwsm = new DefaultWebSecurityManager();
         dwsm.setRealm(myRealm());
         // 设置缓存管理器为 ehcache
@@ -62,7 +63,7 @@ public class ShiroConfig {
     }
 
     @Bean
-    public MyRealm myRealm(){
+    public MyRealm myRealm() {
         MyRealm myRealm = new MyRealm();
         // realm中设置盐的凭证器
         myRealm.setCredentialsMatcher(credentialsMatcher());
@@ -71,7 +72,7 @@ public class ShiroConfig {
 
     // 加盐 凭证器
     @Bean
-    public HashedCredentialsMatcher credentialsMatcher(){
+    public HashedCredentialsMatcher credentialsMatcher() {
         HashedCredentialsMatcher hcm = new HashedCredentialsMatcher();
         hcm.setHashAlgorithmName("MD5"); //加密方式
         hcm.setHashIterations(1024); //散列次数
@@ -80,18 +81,19 @@ public class ShiroConfig {
 
     //用户授权信息Cache, 采用EhCache
     @Bean
-    public EhCacheManager ehCacheManager(){
+    public EhCacheManager ehCacheManager() {
         EhCacheManager ehCacheManager = new EhCacheManager();
 //        ehCacheManager.setCacheManagerConfigFile("classpath:ehcache-shiro.xml");
         return ehCacheManager;
     }
 
     @Bean
-    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager){
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;
     }
+
     @Bean
     public DefaultAdvisorAutoProxyCreator getDefaultAdvisorAutoProxyCreator() {
         DefaultAdvisorAutoProxyCreator daap = new DefaultAdvisorAutoProxyCreator();
@@ -101,7 +103,7 @@ public class ShiroConfig {
 
     // 方言
     @Bean
-    public ShiroDialect shiroDialect(){
+    public ShiroDialect shiroDialect() {
         return new ShiroDialect();
     }
 
@@ -111,7 +113,7 @@ public class ShiroConfig {
     createSimpleMappingExceptionResolver() {
         SimpleMappingExceptionResolver r = new SimpleMappingExceptionResolver();
         Properties mappings = new Properties();
-        mappings.setProperty("UnauthorizedException","/nopower");
+        mappings.setProperty("UnauthorizedException", "/nopower");
         r.setExceptionMappings(mappings);  // None by default
         return r;
     }

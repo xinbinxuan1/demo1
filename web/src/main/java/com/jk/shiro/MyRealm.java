@@ -39,12 +39,12 @@ public class MyRealm extends AuthorizingRealm {
     // AuthenticationToken 用于收集用户提交的身份（如用户名）及凭据（如密码）
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-       // 1. 获取登录页面用户输入的用户名
+        // 1. 获取登录页面用户输入的用户名
         String userCode = authenticationToken.getPrincipal().toString();
         // 2. 调用service层接口，通过用户名查询用户信息
         SysUser user = userService.selectUserInfoByCode(userCode);
         // 3. 如果用户对象为null，用户名不存在, 则返回账号不存在异常
-        if(user == null){
+        if (user == null) {
             // 不知道账号异常 （账号不存在）
             throw new UnknownAccountException();
         }
@@ -57,14 +57,13 @@ public class MyRealm extends AuthorizingRealm {
     }
 
 
-
     public static void main(String[] args) {
         String hashAlgorithmName = "MD5";//加密方式 MD5  SHA
         Object crdentials = "admin";//密码原值
         Object salt = "admin";//盐值 (用户账号、UUID、时间戳、随机字母 作为盐值，盐值必须保持唯一)
         ByteSource saltByte = ByteSource.Util.bytes(salt);
         int hashIterations = 1024;//加密1024次  散列次数
-        Object result = new SimpleHash(hashAlgorithmName,crdentials,saltByte,hashIterations);
+        Object result = new SimpleHash(hashAlgorithmName, crdentials, saltByte, hashIterations);
         //result 加密后的值设置为数据库中的密码
         System.out.println(result);
     }

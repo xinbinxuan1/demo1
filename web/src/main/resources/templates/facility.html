@@ -12,41 +12,44 @@
 </head>
 <body style="background-color: rgba(200,100,50,0)">
 <div class="container" id="app">
-    <input  type="button" shiro:hasPermission="goods:deleteAll" class="btn btn-default" value="删除" onclick="delpi()">
-    <button type="button" shiro:hasPermission="goods:insertAll" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" onclick="xiu(0);"><i class="fa fa-file-o"></i> 新建</button>
+    <input type="button" shiro:hasPermission="goods:deleteAll" class="btn btn-default" value="删除" onclick="delpi()">
+    <button type="button" shiro:hasPermission="goods:insertAll" class="btn btn-default" title="新建" data-toggle="modal"
+            data-target="#editModal" onclick="xiu(0);"><i class="fa fa-file-o"></i> 新建
+    </button>
     <table class="table table-bordered">
-        <thead >
-            <tr>
-                <th><input type="checkbox" id="check"></th>
-                <th>编号</th>
-                <th>设备名称</th>
-                <th>设备识别号</th>
-                <th>设备类型</th>
-                <th>设备规格</th>
-                <th>设备节点</th>
-                <th>备注</th>
-                <th>账户启用状态</th>
-                <th>操作</th>
-            </tr>
+        <thead>
+        <tr>
+            <th><input type="checkbox" id="check"></th>
+            <th>编号</th>
+            <th>设备名称</th>
+            <th>设备识别号</th>
+            <th>设备类型</th>
+            <th>设备规格</th>
+            <th>设备节点</th>
+            <th>备注</th>
+            <th>账户启用状态</th>
+            <th>操作</th>
+        </tr>
         </thead>
         <tbody>
-            <tr v-for="faci in facilityList">
-                <td><input type="checkbox" name="checkid" :value="faci.id"></td>
-                <td>{{faci.id}}</td>
-                <td>{{faci.facilityName}}</td>
-                <td>{{faci.facilityNumber}}</td>
-                <td>{{faci.typeName}}</td>
-                <td>{{faci.facilityGui}}</td>
-                <td>{{faci.facilityNode}}</td>
-                <td>{{faci.remark}}</td>
-                <td>{{faci.status}}</td>
-                <td>
+        <tr v-for="faci in facilityList">
+            <td><input type="checkbox" name="checkid" :value="faci.id"></td>
+            <td>{{faci.id}}</td>
+            <td>{{faci.facilityName}}</td>
+            <td>{{faci.facilityNumber}}</td>
+            <td>{{faci.typeName}}</td>
+            <td>{{faci.facilityGui}}</td>
+            <td>{{faci.facilityNode}}</td>
+            <td>{{faci.remark}}</td>
+            <td>{{faci.status}}</td>
+            <td>
 
-                    <input type="button" shiro:hasPermission="goods:deleteAll" value="删除" @click="shan(faci.id)"> |
-                    <a data-toggle="modal" shiro:hasPermission="goods:selfacilityId" data-target="#editModal" @click="xiu(faci.id)">[编辑]</a>
+                <input type="button" shiro:hasPermission="goods:deleteAll" value="删除" @click="shan(faci.id)"> |
+                <a data-toggle="modal" shiro:hasPermission="goods:selfacilityId" data-target="#editModal"
+                   @click="xiu(faci.id)">[编辑]</a>
 
-                </td>
-            </tr>
+            </td>
+        </tr>
         </tbody>
     </table>
     <div class="col-md-6">
@@ -57,11 +60,13 @@
         </select>条,共 {{totalPage}} 页.一共 {{total}} 条记录
         </strong>
     </div>
-    <div id="example" style="text-align: right"> <ul id="pageLimit"></ul> </div>
+    <div id="example" style="text-align: right">
+        <ul id="pageLimit"></ul>
+    </div>
 </div>
 
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" >
+    <div class="modal-dialog">
         <div class="modal-content" id="ppa">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -69,33 +74,40 @@
             </div>
             <form id="myform" method="post">
                 <div class="modal-body">
-                    <table class="table table-bordered table-striped"  width="800px">
-                        <input class="form-control" name="id" style="display:none" readonly="readonly" v-model="list.id">
+                    <table class="table table-bordered table-striped" width="800px">
+                        <input class="form-control" name="id" style="display:none" readonly="readonly"
+                               v-model="list.id">
                         <tr>
                             <td>设备名称</td>
-                            <td><input class="form-control" type="text" name="facilityName" placeholder="设备名称" v-model="list.facilityName"></td>
+                            <td><input class="form-control" type="text" name="facilityName" placeholder="设备名称"
+                                       v-model="list.facilityName"></td>
                         </tr>
                         <tr>
                             <td>设备识别号</td>
                             <td>
-                                <input class="form-control" type="text" name="facilityNumber" placeholder="设备识别号" v-model="list.facilityNumber">
+                                <input class="form-control" type="text" name="facilityNumber" placeholder="设备识别号"
+                                       v-model="list.facilityNumber">
                             </td>
                         </tr>
                         <tr>
                             <td>设备类型</td>
-                            <td><input class="form-control" type="text" name="typeName" placeholder="设备类型" v-model="list.typeName"></td>
+                            <td><input class="form-control" type="text" name="typeName" placeholder="设备类型"
+                                       v-model="list.typeName"></td>
                         </tr>
                         <tr>
                             <td>设备规格</td>
-                            <td><input class="form-control" type="text" name="facilityGui" placeholder="设备规格" v-model="list.facilityGui"></td>
+                            <td><input class="form-control" type="text" name="facilityGui" placeholder="设备规格"
+                                       v-model="list.facilityGui"></td>
                         </tr>
                         <tr>
                             <td>设备节点</td>
-                            <td><input class="form-control" type="text" name="facilityNode" placeholder="设备节点" v-model="list.facilityNode"></td>
+                            <td><input class="form-control" type="text" name="facilityNode" placeholder="设备节点"
+                                       v-model="list.facilityNode"></td>
                         </tr>
                         <tr>
                             <td>备注</td>
-                            <td><input class="form-control" type="text" name="remark" placeholder="备注" v-model="list.remark"></td>
+                            <td><input class="form-control" type="text" name="remark" placeholder="备注"
+                                       v-model="list.remark"></td>
                         </tr>
                         <tr>
                             <td>账户启用状态</td>
@@ -116,121 +128,131 @@
 </div>
 </body>
 <script type="text/javascript">
-    var vm=new Vue({
-        el:"#app",
-        data:{
-            facilityList:"",
-            totalPage:"",
-            total:"",
-            currPage:"1",
-            pageSize:"3"
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            facilityList: "",
+            totalPage: "",
+            total: "",
+            currPage: "1",
+            pageSize: "3"
         }
     })
-    var vn=new Vue({
-        el:"#ppa",
-        data:{
-            list:""
+    var vn = new Vue({
+        el: "#ppa",
+        data: {
+            list: ""
         }
     })
     $(function () {
         selfacilitysss();
         $("#check").click(function () {
-          $("input[name='checkid']").attr("checked",this.checked);
-         })
+            $("input[name='checkid']").attr("checked", this.checked);
+        })
     })
 
 
     function insert() {
         $.ajax({
-            url:"/insertAll",
-            type:"post",
-            data:$("#myform").serialize(),
-            datatype:'json',
-            success:function(){
+            url: "/insertAll",
+            type: "post",
+            data: $("#myform").serialize(),
+            datatype: 'json',
+            success: function () {
                 selfacilitysss();
             },
         });
     }
-   function xiu(ids) {
-    $.ajax({
-        url:"/selfacilityId",
-        type:"post",
-        data:{ids:ids},
-        success:function (data) {
-                vn.list=data;
-        }
-    })
-   }
+
+    function xiu(ids) {
+        $.ajax({
+            url: "/selfacilityId",
+            type: "post",
+            data: {ids: ids},
+            success: function (data) {
+                vn.list = data;
+            }
+        })
+    }
+
     function shan(rid) {
-        if (rid=="") {
+        if (rid == "") {
             alert("请至少选中一条！");
             return;
         }
         $.ajax({
-            url:"/deleteAll",
-            type:"post",
-            data:{'ids':rid},
-            success:function(){
+            url: "/deleteAll",
+            type: "post",
+            data: {'ids': rid},
+            success: function () {
                 selfacilitysss();
             },
         });
     }
-    function delpi(){
+
+    function delpi() {
         var arr = document.getElementsByName("checkid");
-        var rid="";
-        for ( var i = 0; i < arr.length; i++) {
+        var rid = "";
+        for (var i = 0; i < arr.length; i++) {
             if (arr[i].checked) {
-                rid+=rid==""?arr[i].value:","+arr[i].value;
+                rid += rid == "" ? arr[i].value : "," + arr[i].value;
             }
         }
-        if (rid=="") {
+        if (rid == "") {
             alert("请至少选中一条！");
             return;
         }
         $.ajax({
-            url:"/deleteAll",
-            type:"post",
-            data:{'ids':rid},
-            success:function(){
+            url: "/deleteAll",
+            type: "post",
+            data: {'ids': rid},
+            success: function () {
                 selfacilitysss();
             },
         });
     }
+
     function selfacilitysss() {
-         $.ajax({
-             url:"/selFacility",
-             type:"post",
-             data:{currPage:vm.currPage,pageSize:vm.pageSize},
-             dataType:"json",
-             success:function (data) {
-                 vm.facilityList = data.rows;
-                 vm.totalPage = data.totalPage;
-                 vm.total = data.total;
-                 vm.currPage = data.currPage;
-                 vm.pageSize = data.pageSize;
-                 setPage(data.currPage,data.totalPage,data.pageSize,selfacilitysss);
-             }
-         })
+        $.ajax({
+            url: "/selFacility",
+            type: "post",
+            data: {currPage: vm.currPage, pageSize: vm.pageSize},
+            dataType: "json",
+            success: function (data) {
+                vm.facilityList = data.rows;
+                vm.totalPage = data.totalPage;
+                vm.total = data.total;
+                vm.currPage = data.currPage;
+                vm.pageSize = data.pageSize;
+                setPage(data.currPage, data.totalPage, data.pageSize, selfacilitysss);
+            }
+        })
     }
+
     function setPage(pageCurrent, pageSum, pageSize, callback) {
         $('#pageLimit').bootstrapPaginator({
             currentPage: pageCurrent,//当前的请求页面。
             totalPages: pageSum,//一共多少页。
-            size:"normal",//应该是页眉的大小。
+            size: "normal",//应该是页眉的大小。
             bootstrapMajorVersion: 3,//bootstrap的版本要求。
-            alignment:"right",
-            numberOfPages:pageSize,//一页列出多少数据。
+            alignment: "right",
+            numberOfPages: pageSize,//一页列出多少数据。
             itemTexts: function (type, page, current) {//如下的代码是将页眉显示的中文显示我们自定义的中文。
                 switch (type) {
-                    case "first": return "首页";
-                    case "prev": return "上一页";
-                    case "next": return "下一页";
-                    case "last": return "末页";
-                    case "page": return page;
+                    case "first":
+                        return "首页";
+                    case "prev":
+                        return "上一页";
+                    case "next":
+                        return "下一页";
+                    case "last":
+                        return "末页";
+                    case "page":
+                        return page;
                 }
             },
             //当单击操作按钮的时候, 执行该函数, 调用ajax渲染页面
-            onPageClicked: function (event,originalEvent,type,page) {
+            onPageClicked: function (event, originalEvent, type, page) {
                 // 把当前点击的页码赋值给currentPage, 调用ajax,渲染页面
                 vm.currPage = page;
                 callback && callback()

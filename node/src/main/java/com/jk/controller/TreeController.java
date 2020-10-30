@@ -14,8 +14,9 @@ import java.util.List;
 public class TreeController {
     @Autowired
     private TreeService treeService;
+
     @RequestMapping("queryTree")
-    public List<TreeBean> queryTree(){
+    public List<TreeBean> queryTree() {
 
         return treeService.queryTree();
     }

@@ -21,37 +21,37 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("/findPage")
-    public PageResult findPage(@RequestParam Integer currPage,@RequestParam Integer pageSize){
-        return userService.findPage(currPage,pageSize);
+    public PageResult findPage(@RequestParam Integer currPage, @RequestParam Integer pageSize) {
+        return userService.findPage(currPage, pageSize);
     }
 
     @RequestMapping("/insertUser")
-    public void insertUser(@RequestBody StaffBean staff){
+    public void insertUser(@RequestBody StaffBean staff) {
         userService.insertUser(staff);
     }
 
     @RequestMapping("/deleteUser")
-    public void deleteUser(@RequestBody String[] id){
+    public void deleteUser(@RequestBody String[] id) {
         userService.deleteUser(id);
     }
 
     @RequestMapping("/huiUser")
-    public StaffBean huiUser(@RequestParam Integer id){
+    public StaffBean huiUser(@RequestParam Integer id) {
         return userService.huiUser(id);
     }
 
     @RequestMapping("/selectUserInfoByCode")
-    public SysUser selectUserInfoByCode(@RequestParam String userCode){
+    public SysUser selectUserInfoByCode(@RequestParam String userCode) {
         return userService.selectUserInfoByCode(userCode);
     }
 
     @RequestMapping("/selectListTree")
-    List<Tree> selectListTree(@RequestParam Integer userId){
+    List<Tree> selectListTree(@RequestParam Integer userId) {
         return userService.selectListTree(userId);
     }
 
     @RequestMapping("/selectPowerKeyList")
-    public List<String> selectPowerKeyList(@RequestParam Integer userId){
+    public List<String> selectPowerKeyList(@RequestParam Integer userId) {
         return userService.selectPowerKeyList(userId);
     }
 }

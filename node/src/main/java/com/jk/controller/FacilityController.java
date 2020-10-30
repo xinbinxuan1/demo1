@@ -28,8 +28,9 @@ public class FacilityController {
     public void insertAll(@RequestBody FacilityBean facilityBean) {
         facilityService.insertAll(facilityBean);
     }
+
     @RequestMapping("selfacilitybean")
-    public FacilityBean selfacilitybean(@RequestParam Integer ids){
+    public FacilityBean selfacilitybean(@RequestParam Integer ids) {
         return facilityService.selfacilitybean(ids);
     }
 

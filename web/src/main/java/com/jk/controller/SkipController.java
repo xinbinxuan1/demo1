@@ -13,22 +13,23 @@ public class SkipController {
 
     @RequestMapping("/touser")
     @RequiresPermissions("user:findPage")
-    public String touser(){
+    public String touser() {
         return "user";
     }
 
     @RequestMapping("/tofacility")
     @RequiresPermissions("goods:tofacility")
-    public String tofacility(){
+    public String tofacility() {
         return "facility";
     }
 
     @RequestMapping("/toLogin")
-    public String tologin(){
+    public String tologin() {
         return "login";
     }
+
     @RequestMapping("/toindex")
-    public String toindex(){
+    public String toindex() {
         return "index";
     }
 
