@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
@@ -19,16 +19,16 @@ public class UserServiceImpl implements UserService{
     @Override
     public PageResult findPage(Integer currPage, Integer pageSize) {
         Long total = userMapper.findPagecount();
-        List<StaffBean> list = userMapper.findPage(currPage,pageSize);
-        Long totalPage = total%pageSize == 0 ? total/pageSize : (total/pageSize + 1);
+        List<StaffBean> list = userMapper.findPage(currPage, pageSize);
+        Long totalPage = total % pageSize == 0 ? total / pageSize : (total / pageSize + 1);
         return new PageResult(total, list, currPage, pageSize, totalPage);
     }
 
     @Override
     public void insertUser(StaffBean staff) {
-        if (staff.getId()==null){
+        if (staff.getId() == null) {
             userMapper.insertUser(staff);
-        }else{
+        } else {
             userMapper.updateUser(staff);
         }
     }
@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<Tree> selectListTree(Integer userId) {
         Integer pid = 1;
-        List<Tree> treeList = nodeList(pid,userId);
+        List<Tree> treeList = nodeList(pid, userId);
         return treeList;
     }
 
@@ -60,12 +60,12 @@ public class UserServiceImpl implements UserService{
         return userMapper.selectPowerKeyList(userId);
     }
 
-    private List<Tree> nodeList(Integer pid,Integer userId) {
-        List<Tree> treeList = userMapper.selectListTree(pid,userId);
-        for (Tree tree:
-            treeList) {
-            List<Tree> nodeList = nodeList(tree.getId(),userId);
-            if(nodeList == null || nodeList.size() <= 0) {
+    private List<Tree> nodeList(Integer pid, Integer userId) {
+        List<Tree> treeList = userMapper.selectListTree(pid, userId);
+        for (Tree tree :
+                treeList) {
+            List<Tree> nodeList = nodeList(tree.getId(), userId);
+            if (nodeList == null || nodeList.size() <= 0) {
                 tree.setSelectable(true);
                 tree.setLeaf(true);
             } else {

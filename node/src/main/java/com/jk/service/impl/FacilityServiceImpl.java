@@ -30,9 +30,9 @@ public class FacilityServiceImpl implements FacilityService {
 
     @Override
     public void insertAll(FacilityBean facility) {
-        if(facility.getId()==null){
+        if (facility.getId() == null) {
             facilityBeanMapper.insert(facility);
-        }else {
+        } else {
             facilityBeanMapper.updateByPrimaryKey(facility);
         }
 

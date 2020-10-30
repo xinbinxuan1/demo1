@@ -12,24 +12,25 @@ import java.util.List;
 public class TreeServiceImpl implements TreeService {
     @Autowired
     private TreeMapper treeMapper;
+
     @Override
     public List<TreeBean> queryTree() {
-        int pid=0;
+        int pid = 0;
         List<TreeBean> list = getfind(pid);
         return list;
     }
 
     private List<TreeBean> getfind(int pid) {
-        List<TreeBean> list=treeMapper.findetree(pid);
-        for (TreeBean treeBean:list) {
-            Integer id=treeBean.getId();
-            List<TreeBean> list1= getfind(id);
+        List<TreeBean> list = treeMapper.findetree(pid);
+        for (TreeBean treeBean : list) {
+            Integer id = treeBean.getId();
+            List<TreeBean> list1 = getfind(id);
 
-            if (list1!=null && list1.size()>0) {
+            if (list1 != null && list1.size() > 0) {
                 treeBean.setNodes(list1);
                 treeBean.setLeaf(true);
                 treeBean.setSelectable(false);
-            }else{
+            } else {
                 treeBean.setLeaf(false);
                 treeBean.setSelectable(true);
             }

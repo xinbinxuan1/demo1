@@ -28,25 +28,25 @@ public class UserController {
     private Userservice userservice;
 
     @RequestMapping("/findPage")
-    public PageResult findPage(Integer currPage,Integer pageSize){
-        return userservice.findPage(currPage,pageSize);
+    public PageResult findPage(Integer currPage, Integer pageSize) {
+        return userservice.findPage(currPage, pageSize);
     }
 
     @RequestMapping("/insertUser")
     @RequiresPermissions("user:insertUser")
-    public void insertUser(StaffBean staff){
+    public void insertUser(StaffBean staff) {
         userservice.insertUser(staff);
     }
 
     @RequestMapping("/deleteUser")
     @RequiresPermissions("user:deleteUser")
-    public void deleteUser(String[] id){
+    public void deleteUser(String[] id) {
         userservice.deleteUser(id);
     }
 
     @RequestMapping("/huiUser")
     @RequiresPermissions("user:huiUser")
-    public StaffBean huiUser(Integer id){
+    public StaffBean huiUser(Integer id) {
         return userservice.huiUser(id);
     }
 
@@ -68,7 +68,7 @@ public class UserController {
     }
 
     @RequestMapping("/selectListTree")
-    public List<Tree> selectListTree(){
+    public List<Tree> selectListTree() {
         SysUser user = (SysUser) SecurityUtils.getSubject().getPrincipal();
         return userservice.selectListTree(user.getId());
     }

@@ -16,7 +16,7 @@ import java.util.List;
 public interface Userservice {
 
     @RequestMapping("/findPage")
-    public PageResult findPage(@RequestParam Integer currPage,@RequestParam Integer pageSize);
+    public PageResult findPage(@RequestParam Integer currPage, @RequestParam Integer pageSize);
 
     @RequestMapping("/insertUser")
     public void insertUser(@RequestBody StaffBean staff);
